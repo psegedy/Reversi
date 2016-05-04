@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="IJA Uloha 3" default="compile" basedir=".">
+    
+    <description>
+        IJA: Uloha 3 build.xml
+    </description>
+
+    <property name="src" location="src"/>
+    <property name="build" location="build"/>
+    <property name="dest-client" location="dest-client"/>
+    <property name="lib" location="lib"/>
+
+    <target name="compile">
+        <mkdir dir="${build}" />
+        <mkdir dir="${dest-client}"/>
+        <javac srcdir="${src}" destdir="${build}" includeantruntime="false">
+            <classpath>
+                <pathelement path="${lib}/junit-4.12.jar" />
+                <pathelement path="${lib}/hamcrest-core-1.3.jar" />
+            </classpath>
+        </javac>
+        
+        <jar destfile="${dest-client}/ReversiTest.jar" basedir="${build}">
+            <manifest>
+                <attribute name="main-class" value="ija.ija2016.reversi.ReversiTest" />
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="compile">
+        <junit printsummary="yes" fork="yes" haltonfailure="yes">
+            <classpath>
+                <pathelement path="${dest-client}/ReversiTest.jar" />
+                <pathelement path="${lib}/junit-4.12.jar" />
+                <pathelement path="${lib}/hamcrest-core-1.3.jar" />
+            </classpath>
+            <test name="ija.ija2016.reversi.ReversiTest"/>
+        </junit>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${dest-client}"/>
+    </target>
+</project>
