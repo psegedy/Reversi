@@ -1,4 +1,4 @@
-package ija.ija2016.reversi;
+package ija.ija2016.reversi.gui;
 
 import java.awt.Font;
 import java.awt.Color;

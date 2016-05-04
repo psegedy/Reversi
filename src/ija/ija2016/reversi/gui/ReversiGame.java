@@ -1,4 +1,4 @@
-package ija.ija2016.reversi;
+package ija.ija2016.reversi.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,8 +19,8 @@ import ija.ija2016.reversi.board.Field;
 import ija.ija2016.reversi.game.Game;
 import ija.ija2016.reversi.game.Player;
 import ija.ija2016.reversi.game.ReversiRules;
-import ija.ija2016.reversi.Cell;
-import ija.ija2016.reversi.ReversiMenu;
+import ija.ija2016.reversi.gui.Cell;
+import ija.ija2016.reversi.gui.ReversiMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
