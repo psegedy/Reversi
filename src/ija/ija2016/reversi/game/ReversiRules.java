@@ -4,7 +4,11 @@ import ija.ija2016.reversi.board.BoardField;
 import ija.ija2016.reversi.board.Field;
 import ija.ija2016.reversi.board.Rules;
 
-public class ReversiRules implements Rules {
+public class ReversiRules implements Rules, java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6722133764844754960L;
 	private int size;
 	//private int disksNum;
 	

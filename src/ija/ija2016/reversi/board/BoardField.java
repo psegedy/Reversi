@@ -1,7 +1,11 @@
 package ija.ija2016.reversi.board;
 
-public class BoardField implements Field {
+public class BoardField implements Field, java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8757784087839655732L;
 	//private static int startDisks = 0;
 	private int row;
 	private int col;

@@ -1,7 +1,11 @@
 package ija.ija2016.reversi.board;
 
-public class Board {
+public class Board implements java.io.Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5130634704230000672L;
 	public static int startDisks = 0;
 	private int size;
 	private Rules rules;

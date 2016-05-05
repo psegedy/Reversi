@@ -1,6 +1,11 @@
 package ija.ija2016.reversi.board;
 
-public class BorderField implements Field {
+public class BorderField implements Field, java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4767790484188912360L;
 
 	@Override
 	public void addNextField(Direction dirs, Field field) {
