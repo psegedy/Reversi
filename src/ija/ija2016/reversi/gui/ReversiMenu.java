@@ -6,16 +6,23 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import ija.ija2016.reversi.gui.ReversiGame;
 
 import javax.swing.*;
 
 public class ReversiMenu extends JFrame{
-
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 6491712156407424473L;
+
+	private static ReversiMenu menu;
+	private static boolean gameLoaded = false;
+
+	static String filepath;
+
 	private int size = 8;
 	
 	/* false is simple AI */
@@ -67,7 +74,7 @@ public class ReversiMenu extends JFrame{
 	
 	public static void main(String[] args) {
 		
-		ReversiMenu menu = new ReversiMenu();
+		menu = new ReversiMenu();
 		
 		menu.btnNewGameButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -85,6 +92,25 @@ public class ReversiMenu extends JFrame{
 				 *	int FreezeCount() returns getValue(count of disks);
 				 **************************************************************/
 				// TODO
+			}
+		});
+		menu.btnLoadGameButton.addMouseListener(new MouseAdapter() {
+			private JFileChooser fc;
+			
+
+			public void mouseClicked(MouseEvent e) {
+				/* ON CLICK ON LOAD GAME BUTTON */
+				gameLoaded = true;
+				fc = new JFileChooser();
+				int returnVal = fc.showOpenDialog(menu);
+				 
+	            if (returnVal == JFileChooser.APPROVE_OPTION) {
+	                File file = fc.getSelectedFile();
+	                filepath = file.getPath();
+	                ReversiGame game = new ReversiGame(menu);
+	                Thread t = new Thread(game);
+					t.start();
+	            }
 			}
 		});
 	}
@@ -336,16 +362,6 @@ public class ReversiMenu extends JFrame{
 		this.repaint();
 		
 		
-		
-		
-		this.btnLoadGameButton.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				/* ON CLICK ON LOAD GAME BUTTON */
-				// TODO
-			}
-		});
-		
-		
 		this.btnOptionsButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -570,6 +586,18 @@ public class ReversiMenu extends JFrame{
 	
 	public int getFreezeCount(){
 		return scBarCount.getValue();
+	}
+	
+	public boolean isGameLoaded() {
+		return gameLoaded;
+	}
+
+	public String getFilepath() {
+		return filepath;
+	}
+	
+	public static void setGameLoaded(boolean gameLoaded) {
+		ReversiMenu.gameLoaded = gameLoaded;
 	}
 	
 }

@@ -1,7 +1,11 @@
 package ija.ija2016.reversi.board;
 
-public class Disk {
+public class Disk implements java.io.Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3166896002752168247L;
 	private boolean isWhite;
 
 	public Disk(boolean isWhite) {

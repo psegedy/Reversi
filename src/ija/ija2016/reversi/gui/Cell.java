@@ -14,10 +14,11 @@ import ija.ija2016.reversi.game.Game;
 import ija.ija2016.reversi.game.Player;
 
 public class Cell extends JPanel {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5199856827210931513L;
 	private Game game;
 	private Field field;
 	private Disk disk;
@@ -56,6 +57,10 @@ public class Cell extends JPanel {
 		this.game = game;
 		this.field = game.getBoard().getField(row, col);
 		disk = field.getDisk();
+		if (field.isEmpty())
+			System.out.println("-");
+		else
+			System.out.println(disk.isWhite());
 		repaint();
 	}
 	
@@ -83,6 +88,12 @@ public class Cell extends JPanel {
 				System.out.println("put black");
 				return true;
 			}
+		}
+		return false;
+	}
+	public boolean canPutDisk(Game game) {
+		if (game.currentPlayer().canPutDisk(game.getBoard().getField(row, col))) {
+			return true;
 		}
 		return false;
 	}

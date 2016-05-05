@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,11 +24,20 @@ import ija.ija2016.reversi.gui.Cell;
 import ija.ija2016.reversi.gui.ReversiMenu;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.awt.ComponentOrientation;
 import java.awt.CardLayout;
 import java.awt.GridBagLayout;
@@ -40,11 +50,16 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Insets;
 
-public class ReversiGame extends JFrame implements MouseListener, Runnable{
+public class ReversiGame extends JFrame implements MouseListener, Runnable, ActionListener, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8291243908727050910L;
 	private int size;
 	private JPanel contentPane;
 	private List<Cell> cells = new ArrayList<Cell>();
+	private Stack<Game> gameStack = new Stack<Game>();
 	private ReversiMenu menu;
 	private ReversiRules rules;
 	private Board board;
@@ -64,6 +79,9 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable{
 	private JLabel lblTurn;
 	private JButton btnSaveGame;
 	private JButton btnUndo;
+	private JFileChooser fc;
+	private String savedGamePath;
+	private ReversiGame frame;
 	
 	/**
 	 * Launch the application.
@@ -72,10 +90,10 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable{
 	@Override
 	public void run() {
 		try {
-			ReversiGame frame = new ReversiGame(menu);
+			frame = new ReversiGame(menu);
 			frame.setVisible(true);
-			frame.setGrid(game);
 			frame.pack();
+			menu.setGameLoaded(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -104,6 +122,12 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable{
         
         game.addPlayer(p1);
         game.addPlayer(p2);
+        
+        fc = new JFileChooser();
+        
+        serialize(game, "game-undo.ser");
+        
+        gameStack.push(game);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 460, 460);
@@ -129,10 +153,12 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable{
 		topPanel.add(btnPanel, BorderLayout.EAST);
 		
 		btnUndo = new JButton("Undo");
+		btnUndo.addActionListener(this);
 		btnUndo.setEnabled(false);
 		btnPanel.add(btnUndo);
 		
 		btnSaveGame = new JButton("Save Game");
+		btnSaveGame.addActionListener(this);
 		btnPanel.add(btnSaveGame);
 		
 		JPanel scorePanel = new JPanel();
@@ -212,6 +238,50 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable{
 		this.setResizable(false);
 		this.setTitle("Reversi");
 		
+		if (menu.isGameLoaded()) {
+			deserialize(menu.getFilepath());
+		}
+		
+		setGrid(game);
+		printScore();
+		
+	}
+	private void serialize(Object o, String filepath) {
+        try
+        {
+           FileOutputStream fileOut =
+           new FileOutputStream(filepath);
+           ObjectOutputStream out = new ObjectOutputStream(fileOut);
+           out.writeObject(o);
+           out.close();
+           fileOut.close();
+        }catch(IOException i)
+        {
+            i.printStackTrace();
+        }
+	}
+	/**
+	 * Deserialize object from file
+	 * @param filepath path to the file
+	 */
+	public void deserialize(String filepath) {
+		try
+	      {
+	         FileInputStream fileIn = new FileInputStream(filepath);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         this.game = (Game) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i)
+	      {
+	         i.printStackTrace();
+	         return;
+	      }catch(ClassNotFoundException c)
+	      {
+	         System.out.println("Game class not found");
+	         c.printStackTrace();
+	         return;
+	      }
 	}
 	
 	private void setGrid(Game game) {
@@ -287,9 +357,12 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable{
 	public void mouseClicked(MouseEvent e) {
 		for (Cell cell : cells) {
 			if (e.getSource() == cell) {
-				if(cell.putDisk(game)) {
+				if(cell.canPutDisk(game)) {
+					serialize(game, "game-undo.ser");
+					cell.putDisk(game);
 					game.nextPlayer();
 					btnUndo.setEnabled(true);
+					gameStack.push(game);
 				}					
 				for (Cell cell2 : cells) {
 					cell2.actualize(game);
@@ -318,6 +391,32 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable{
 					"Switched player", JOptionPane.WARNING_MESSAGE);
 		}
 		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnUndo) {
+			System.out.println("UNDO CLICLEKD");
+			if (humanPlayer) {
+				System.out.println("UNDO");
+				gameStack.pop();
+				//this.game = (Game)gameStack.peek();
+				deserialize("game-undo.ser");
+				btnUndo.setEnabled(false);
+				for (Cell cell : cells) {
+					cell.actualize(game);
+				}
+				printScore();
+			}
+		}
+		if (e.getSource() == btnSaveGame) {
+			int returnVal = fc.showSaveDialog(ReversiGame.this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+            	File file = fc.getSelectedFile();
+            	savedGamePath = file.getPath();
+            }
+            serialize(game, savedGamePath);
+		}
 	}
 
 	@Override
