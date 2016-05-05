@@ -7,9 +7,11 @@ public class Disk implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 3166896002752168247L;
 	private boolean isWhite;
+	private boolean isFreezed;
 
 	public Disk(boolean isWhite) {
 		this.isWhite = isWhite;
+		isFreezed = false;
 	}	
 	
 	public void turn() {
@@ -24,6 +26,14 @@ public class Disk implements java.io.Serializable {
 			return true;
 		else
 			return false;
+	}
+	
+	public boolean isFreezed() {
+		return isFreezed;
+	}
+	
+	public void freezeDisk(boolean isFreezed) {
+		this.isFreezed = isFreezed;
 	}
 	
 	@Override

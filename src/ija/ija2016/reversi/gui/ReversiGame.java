@@ -37,6 +37,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 import java.awt.ComponentOrientation;
 import java.awt.CardLayout;
@@ -82,6 +83,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	private JFileChooser fc;
 	private String savedGamePath;
 	private ReversiGame frame;
+	private Random r;
 	
 	/**
 	 * Launch the application.
@@ -124,6 +126,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
         game.addPlayer(p2);
         
         fc = new JFileChooser();
+        r = new Random();
         
         serialize(game, "game-undo.ser");
         
@@ -244,8 +247,13 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 		
 		setGrid(game);
 		printScore();
+
+		if (isFreeze) {
+			freeze();
+		}
 		
 	}
+	
 	private void serialize(Object o, String filepath) {
         try
         {
@@ -327,6 +335,31 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 			lblTurn.setText("Turn: White");
 		} else 
 			lblTurn.setText("Turn: Black");
+	}
+	
+	public void freeze() {
+		//nrFreezed
+		//freezeFor
+		List<Cell> occupiedCells = new ArrayList<Cell>();
+		for (Cell cell : cells) {
+			if (!cell.isEmpty()) {
+				occupiedCells.add(cell);
+			}
+		}
+		int diskCount = wCount + bCount;
+		int index;
+		if (diskCount/2 < nrFreezed) {
+			nrFreezed = r.nextInt(diskCount/2 + 1);
+		}
+		System.out.println("-----------");
+		System.out.println(nrFreezed);
+		System.out.println("-----------");
+		for (int i = 0; i < nrFreezed; i++) {
+			index = r.nextInt(occupiedCells.size());
+			occupiedCells.get(index).freeze(game, true);
+			//cells.get(index).freeze(game, true);
+			occupiedCells.remove(index);
+		}	
 	}
 	
 	public boolean isGameOver() {

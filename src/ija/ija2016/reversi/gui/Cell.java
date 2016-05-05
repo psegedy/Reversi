@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
+import ija.ija2016.reversi.board.Board;
 import ija.ija2016.reversi.board.Disk;
 import ija.ija2016.reversi.board.Field;
 import ija.ija2016.reversi.game.Game;
@@ -44,6 +45,10 @@ public class Cell extends JPanel {
 				g.fillOval(5, 5, 40, 40);
 			} else {
 				g.setColor(Color.black);
+				g.fillOval(5, 5, 40, 40);
+			}
+			if (disk.isFreezed()){
+				g.setColor(new Color(51, 204, 255));
 				g.fillOval(5, 5, 40, 40);
 			}
 		}
@@ -96,5 +101,10 @@ public class Cell extends JPanel {
 			return true;
 		}
 		return false;
+	}
+	
+	public void freeze(Game game, boolean isFreezed) {
+		game.getBoard().getField(row, col).getDisk().freezeDisk(isFreezed);
+		actualize(game);
 	}
 }
