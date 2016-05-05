@@ -15,6 +15,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 
+import ija.ija2016.reversi.ai.Ai;
+import ija.ija2016.reversi.ai.AiEasy;
+import ija.ija2016.reversi.ai.AiHard;
 import ija.ija2016.reversi.board.Board;
 import ija.ija2016.reversi.board.Field;
 import ija.ija2016.reversi.game.Game;
@@ -83,8 +86,9 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	private JFileChooser fc;
 	private String savedGamePath;
 	private ReversiGame frame;
+	private Ai computer;
 	private Random r;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -245,6 +249,14 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 			deserialize(menu.getFilepath());
 		}
 		
+		if (! this.humanPlayer) {
+			if(this.easyDifficulty){
+				this.computer = new AiEasy();
+			}else {
+				this.computer = new AiHard(); 
+			}
+		}
+		
 		setGrid(game);
 		printScore();
 
@@ -400,6 +412,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 				for (Cell cell2 : cells) {
 					cell2.actualize(game);
 				}
+				
 				break;
 			}
 		}
@@ -418,10 +431,17 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 			btnUndo.setEnabled(false);
 			btnSaveGame.setEnabled(false);
 		} else if (switchPlayer(game.currentPlayer())) {
+			Player switchedPlayer = game.currentPlayer();
 			game.nextPlayer();
+				
 			JOptionPane.showMessageDialog(contentPane,
-					"You have no legal move\n Switched to player: " + game.currentPlayer().toString(),
-					"Switched player", JOptionPane.WARNING_MESSAGE);
+				switchedPlayer.toString()+" have no legal move\n"
+				+" Switched to player: " + game.currentPlayer().toString(),
+				"Switched player", JOptionPane.WARNING_MESSAGE);
+			printScore();
+					
+		} else if (!humanPlayer && ! game.currentPlayer().isWhite()) {
+			this.computer.makeMove(game);
 		}
 		
 	}
