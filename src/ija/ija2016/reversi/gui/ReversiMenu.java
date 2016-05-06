@@ -21,7 +21,7 @@ public class ReversiMenu extends JFrame{
 	private static ReversiMenu menu;
 	private static boolean gameLoaded = false;
 
-	static String filepath;
+	static String filepath = "";
 
 	private int size = 8;
 	
@@ -103,13 +103,21 @@ public class ReversiMenu extends JFrame{
 				gameLoaded = true;
 				fc = new JFileChooser();
 				int returnVal = fc.showOpenDialog(menu);
-				 
 	            if (returnVal == JFileChooser.APPROVE_OPTION) {
-	                File file = fc.getSelectedFile();
-	                filepath = file.getPath();
-	                ReversiGame game = new ReversiGame(menu);
-	                Thread t = new Thread(game);
-					t.start();
+	                File file = null;
+					try {
+						file = fc.getSelectedFile();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					if (file != null) {
+						filepath = file.getPath();
+		                if(!filepath.isEmpty()){
+		                	ReversiGame game = new ReversiGame(menu);
+			                Thread t = new Thread(game);
+							t.start();
+		                }
+					}
 	            }
 			}
 		});

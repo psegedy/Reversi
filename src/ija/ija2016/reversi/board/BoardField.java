@@ -61,9 +61,13 @@ public class BoardField implements Field, java.io.Serializable {
 				if (!tmpField.isEmpty()){
 					// rozne farby
 					if (tmpField.getDisk().isWhite() != disk.isWhite()) {
-						// posuvam sa na dalsie v rovnakom smere
-						tmpField = tmpField.nextField(intToDirection(i));
-						count++; //pocet policok ktore budem otacat
+						if (!tmpField.getDisk().isFreezed()) {
+							// posuvam sa na dalsie v rovnakom smere
+							tmpField = tmpField.nextField(intToDirection(i));
+							count++; //pocet policok ktore budem otacat
+						}
+						else
+							return false;
 					}
 					else if (count != 0) {
 						for (int k = 0; k < count; k++) {
@@ -72,7 +76,7 @@ public class BoardField implements Field, java.io.Serializable {
 								breakAgain = true;
 								break;
 							}
-							if(tmpField.isEmpty())
+							if(tmpField.isEmpty() || tmpField.getDisk().isFreezed())
 								return false;
 							tmpField.getDisk().turn();
 						}
@@ -174,11 +178,18 @@ public class BoardField implements Field, java.io.Serializable {
 				if (!tmpField.isEmpty()){
 					// rozne farby
 					if (tmpField.getDisk().isWhite() != disk.isWhite()) {
-						// posuvam sa na dalsie v rovnakom smere
-						tmpField = tmpField.nextField(intToDirection(i));
-						count++; //pocet policok ktore budem otacat
+						if (!tmpField.getDisk().isFreezed()) {
+							// posuvam sa na dalsie v rovnakom smere
+							tmpField = tmpField.nextField(intToDirection(i));
+							count++; //pocet policok ktore budem otacat
+						}
+						else
+							return false;
 					}
 					else if (count != 0) {
+						if (tmpField.isEmpty() || tmpField.getDisk().isFreezed()) {
+							return false;
+						}
 						return true;
 					}
 					else
