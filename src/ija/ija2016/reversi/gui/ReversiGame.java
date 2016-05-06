@@ -3,7 +3,6 @@ package ija.ija2016.reversi.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -19,7 +18,6 @@ import ija.ija2016.reversi.ai.Ai;
 import ija.ija2016.reversi.ai.AiEasy;
 import ija.ija2016.reversi.ai.AiHard;
 import ija.ija2016.reversi.board.Board;
-import ija.ija2016.reversi.board.Field;
 import ija.ija2016.reversi.game.Game;
 import ija.ija2016.reversi.game.Player;
 import ija.ija2016.reversi.game.ReversiRules;
@@ -28,7 +26,6 @@ import ija.ija2016.reversi.gui.ReversiMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -40,18 +37,14 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
+import java.util.Random;
 import java.awt.ComponentOrientation;
-import java.awt.CardLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JSplitPane;
-import java.awt.Component;
 import javax.swing.JSeparator;
-import javax.swing.JTextPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import java.awt.Insets;
+import java.util.Timer;
 
 public class ReversiGame extends JFrame implements MouseListener, Runnable, ActionListener, Serializable{
 	
@@ -62,7 +55,6 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	private int size;
 	private JPanel contentPane;
 	private List<Cell> cells = new ArrayList<Cell>();
-	private Stack<Game> gameStack = new Stack<Game>();
 	private ReversiMenu menu;
 	private ReversiRules rules;
 	private Board board;
@@ -83,9 +75,12 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	private JButton btnSaveGame;
 	private JButton btnUndo;
 	private JFileChooser fc;
-	private String savedGamePath;
+	private String savedGamePath = "";
 	private ReversiGame frame;
 	private Ai computer;
+	private Random r;
+	private Timer timer;
+
 	/**
 	 * Launch the application.
 	 */
@@ -127,10 +122,10 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
         game.addPlayer(p2);
         
         fc = new JFileChooser();
+        r = new Random();
+        timer = new Timer();
         
         serialize(game, "game-undo.ser");
-        
-        gameStack.push(game);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 460, 460);
@@ -144,11 +139,8 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 		
 		lblTurn = new JLabel("Turn: White");
 		contentPane.add(lblTurn, BorderLayout.SOUTH);
-		//this.pack();
-		//contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel topPanel = new JPanel();
-		//panel.setPreferredSize(new Dimension(100,400));
 		contentPane.add(topPanel, BorderLayout.NORTH);
 		topPanel.setLayout(new BorderLayout(0, 0));
 		
@@ -255,8 +247,13 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 		
 		setGrid(game);
 		printScore();
+
+		if (isFreeze) {
+			freeze();
+		}
 		
 	}
+	
 	private void serialize(Object o, String filepath) {
         try
         {
@@ -305,7 +302,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	    layout.setVgap(2);
 	    
 	    panel.setLayout(layout);    
-	    System.out.println(game.getBoard().getSize());
+
 	    for (int i = 1; i <= game.getBoard().getSize(); i++) {
 	  	  for (int j = 1; j <= game.getBoard().getSize(); j++) {
 	    	  cells.add(new Cell(game, i, j));
@@ -333,11 +330,34 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 		}
 		lblScoreWhite.setText("Score: " + wCount);
 		lblScoreBlack.setText("Score: " + bCount);
-		System.out.println(game.currentPlayer().isWhite());
 		if (game.currentPlayer().isWhite()) {
 			lblTurn.setText("Turn: White");
 		} else 
 			lblTurn.setText("Turn: Black");
+	}
+	
+	public void freeze() {
+		//nrFreezed
+		//freezeFor
+		List<Cell> occupiedCells = new ArrayList<Cell>();
+		for (Cell cell : cells) {
+			if (!cell.isEmpty()) {
+				occupiedCells.add(cell);
+			}
+		}
+		int diskCount = wCount + bCount;
+		int index;
+		if (diskCount/2 <= nrFreezed) {
+			nrFreezed = r.nextInt(diskCount/2 + 1) - 1;
+		}
+		System.out.println("-----------");
+		System.out.println(nrFreezed);
+		System.out.println("-----------");
+		for (int i = 0; i < nrFreezed; i++) {
+			index = r.nextInt(occupiedCells.size());
+			occupiedCells.get(index).freeze(game, true);
+			occupiedCells.remove(index);
+		}	
 	}
 	
 	public boolean isGameOver() {
@@ -373,16 +393,21 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 					cell.putDisk(game);
 					game.nextPlayer();
 					btnUndo.setEnabled(true);
-					gameStack.push(game);
 				}					
 				for (Cell cell2 : cells) {
 					cell2.actualize(game);
-				}
-				
+				}	
 				break;
 			}
 		}
-		printScore();
+		if (!switchPlayer(game.currentPlayer())) {
+			if (!humanPlayer && ! game.currentPlayer().isWhite()) {
+				this.computer.makeMove(game);
+				for (Cell cell : cells) {
+					cell.actualize(game);
+				}
+			}
+		}
 		if (isGameOver()) {
 			String message = "";
 			if (wCount > bCount) {
@@ -392,7 +417,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 				message = "Player BLACK won!";
 			else
 				message = "DRAW!";
-			
+			printScore();
 			JOptionPane.showMessageDialog(contentPane, message, "GAME OVER", JOptionPane.INFORMATION_MESSAGE);
 			btnUndo.setEnabled(false);
 			btnSaveGame.setEnabled(false);
@@ -404,29 +429,20 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 				switchedPlayer.toString()+" have no legal move\n"
 				+" Switched to player: " + game.currentPlayer().toString(),
 				"Switched player", JOptionPane.WARNING_MESSAGE);
-			printScore();
-					
-		} else if (!humanPlayer && ! game.currentPlayer().isWhite()) {
-			this.computer.makeMove(game);
 		}
-		
+		printScore();		
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnUndo) {
-			System.out.println("UNDO CLICLEKD");
-			if (humanPlayer) {
 				System.out.println("UNDO");
-				gameStack.pop();
-				//this.game = (Game)gameStack.peek();
 				deserialize("game-undo.ser");
 				btnUndo.setEnabled(false);
 				for (Cell cell : cells) {
 					cell.actualize(game);
 				}
 				printScore();
-			}
 		}
 		if (e.getSource() == btnSaveGame) {
 			int returnVal = fc.showSaveDialog(ReversiGame.this);
@@ -434,7 +450,9 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
             	File file = fc.getSelectedFile();
             	savedGamePath = file.getPath();
             }
-            serialize(game, savedGamePath);
+            if (!savedGamePath.isEmpty()) {
+            	serialize(game, savedGamePath);
+			}  
 		}
 	}
 
