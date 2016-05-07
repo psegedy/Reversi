@@ -53,15 +53,15 @@ import java.awt.ComponentOrientation;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JSplitPane;
+import javax.swing.Timer;
 import javax.swing.JSeparator;
 import java.awt.Insets;
-import java.util.Timer;
 
 public class ReversiGame extends JFrame implements MouseListener, Runnable, ActionListener, Serializable{
 	
 	
 	private static final long serialVersionUID = 8291243908727050910L;
-	private int size;
+	private int size = 8;
 	private JPanel contentPane;
 	private List<Cell> cells = new ArrayList<Cell>();
 	private ReversiMenu menu;
@@ -89,6 +89,8 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	private Ai computer;
 	private Random r;
 	private Timer timer;
+	private Timer timer2;
+	private boolean unfreeze;
 
 	/**
 	 * Method run 
@@ -100,7 +102,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 			frame = new ReversiGame(menu);
 			frame.setVisible(true);
 			frame.pack();
-			menu.setGameLoaded(false);
+			ReversiMenu.setGameLoaded(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -136,7 +138,8 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
         File workingDirectory = new File(System.getProperty("user.dir") + System.getProperty("file.separator")+ "examples");
         fc.setCurrentDirectory(workingDirectory);
         r = new Random();
-        timer = new Timer();
+        
+        
         
         serialize(game, "game-undo.ser");
 		
@@ -260,10 +263,31 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 		
 		setGrid(game);
 		printScore();
-
+		
+		ActionListener actFrAfter = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				if (isFreeze) {
+					freeze();
+				}
+            }
+        };
+        
+        ActionListener actFrFor = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				if (isFreeze) {
+					unfreeze = true;
+				}
+            }
+        };
+        
+		timer = new Timer(freezeAfter*1000, actFrAfter);
+		timer.start();
+		timer2 = new Timer(freezeFor*1000, actFrFor);
+		
+/*
 		if (isFreeze) {
 			freeze();
-		}
+		}*/
 		
 	}
 	
@@ -323,7 +347,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 		int count = 0;
 	    panel.setBackground(Color.darkGray);
 	    //panel.setSize(300,300);
-	    GridLayout layout = new GridLayout(game.getBoard().getSize(),game.getBoard().getSize());
+	    GridLayout layout = new GridLayout(size, size);
 	    layout.setHgap(2);
 	    layout.setVgap(2);
 	    
@@ -369,8 +393,6 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	 * Method for freezing disks
 	 */
 	public void freeze() {
-		//nrFreezed
-		//freezeFor
 		List<Cell> occupiedCells = new ArrayList<Cell>();
 		for (Cell cell : cells) {
 			if (!cell.isEmpty()) {
@@ -378,18 +400,35 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 			}
 		}
 		int diskCount = wCount + bCount;
+		
 		int index;
 		if (diskCount/2 <= nrFreezed) {
-			nrFreezed = r.nextInt(diskCount/2 + 1) - 1;
+			nrFreezed = r.nextInt(diskCount/2 - 1) + 1;
 		}
-		System.out.println("-----------");
-		System.out.println(nrFreezed);
-		System.out.println("-----------");
 		for (int i = 0; i < nrFreezed; i++) {
 			index = r.nextInt(occupiedCells.size());
 			occupiedCells.get(index).freeze(game, true);
 			occupiedCells.remove(index);
-		}	
+		}
+		for (Cell cell : cells) {
+			cell.actualize(game);
+		}
+		timer.stop();
+		timer2.start();
+	}
+	
+	/**
+	 * Method for unfreezing disks
+	 */
+	public void unfreeze() {
+		for (Cell cell : cells) {
+			if (!cell.isEmpty()) {
+				cell.freeze(game, false);
+			}
+		}
+		unfreeze = false;
+		timer.restart();
+		timer2.stop();
 	}
 	
 	/**
@@ -431,11 +470,13 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	public void mouseClicked(MouseEvent e) {
 		for (Cell cell : cells) {
 			if (e.getSource() == cell) {
-				if(cell.canPutDisk(game)) {
+				if(cell.canPutDisk(game)) {				
 					serialize(game, "game-undo.ser");
 					cell.putDisk(game);
 					game.nextPlayer();
 					btnUndo.setEnabled(true);
+					if (unfreeze)
+						unfreeze();
 				}					
 				for (Cell cell2 : cells) {
 					cell2.actualize(game);
