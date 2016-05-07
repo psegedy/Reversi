@@ -3,9 +3,7 @@ package ija.ija2016.reversi.game;
 import ija.ija2016.reversi.board.Board;
 
 public class Game implements java.io.Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 4225826126034520444L;
 	private Board board;
 	private Player currentPlayer, blackPlayer, whitePlayer;

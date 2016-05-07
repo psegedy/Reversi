@@ -5,9 +5,7 @@ import ija.ija2016.reversi.board.Field;
 import ija.ija2016.reversi.board.Disk;
 
 public class Player implements java.io.Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 3145485149475518508L;
 	private boolean isWhite;
 	

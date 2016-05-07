@@ -22,10 +22,7 @@ public class Disk implements java.io.Serializable {
 	}
 	
 	public boolean isWhite() {
-		if (isWhite == true)
-			return true;
-		else
-			return false;
+		return isWhite;
 	}
 	
 	public boolean isFreezed() {
