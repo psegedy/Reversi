@@ -144,7 +144,7 @@ public class ReversiMenu extends JFrame{
 	
 	
 	/**
-	 * Constructor of entire Jframe
+	 * Constructor of entire Jframe of menu as reversiMenu
 	 */
 	public ReversiMenu() {
 		/* Constructor of JFrame */
