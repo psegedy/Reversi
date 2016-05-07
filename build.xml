@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="IJA Uloha 3" default="compile" basedir=".">
+<project name="Reversi" default="compile" basedir=".">
     
     <description>
-        IJA: Uloha 3 build.xml
+        IJA: Reversi project build.xml
     </description>
 
     <property name="src" location="src"/>
@@ -13,29 +13,21 @@
     <target name="compile">
         <mkdir dir="${build}" />
         <mkdir dir="${dest-client}"/>
-        <javac srcdir="${src}" destdir="${build}" includeantruntime="false">
-            <classpath>
-                <pathelement path="${lib}/junit-4.12.jar" />
-                <pathelement path="${lib}/hamcrest-core-1.3.jar" />
-            </classpath>
-        </javac>
+        <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
         
-        <jar destfile="${dest-client}/ReversiTest.jar" basedir="${build}">
+        <jar destfile="${dest-client}/Reversi.jar" basedir="${build}">
             <manifest>
-                <attribute name="main-class" value="ija.ija2016.reversi.ReversiTest" />
+                <attribute name="main-class" value="ija.ija2016.reversi.gui.ReversiMenu" />
             </manifest>
         </jar>
     </target>
 
     <target name="run" depends="compile">
-        <junit printsummary="yes" fork="yes" haltonfailure="yes">
+        <java jar="${dest-client}/Reversi.jar" fork="true">
             <classpath>
-                <pathelement path="${dest-client}/ReversiTest.jar" />
-                <pathelement path="${lib}/junit-4.12.jar" />
-                <pathelement path="${lib}/hamcrest-core-1.3.jar" />
+                <pathelement path="${dest-client}/Reversi.jar" />
             </classpath>
-            <test name="ija.ija2016.reversi.ReversiTest"/>
-        </junit>
+        </java>
     </target>
 
     <target name="clean">

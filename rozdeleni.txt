@@ -1,0 +1,2 @@
+xseged00: 100
+xdudla00: 100
