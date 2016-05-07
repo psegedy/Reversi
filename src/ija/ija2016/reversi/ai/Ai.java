@@ -2,7 +2,7 @@
  * Interface Ai for changing game with method makeMove
  * make Move has to implement some algorithm eg. random.
  * @author Patrik Segedy 
- * @author Tibor Dudl·k
+ * @author Tibor Dudl√°k
  */
 
 package ija.ija2016.reversi.ai;

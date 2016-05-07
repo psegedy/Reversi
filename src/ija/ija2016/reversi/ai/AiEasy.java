@@ -1,7 +1,7 @@
 /**
  * Class AiEasy implements Interface Ai
  * @author Patrik Segedy 
- * @author Tibor Dudl·k
+ * @author Tibor Dudl√°k
  */
 
 package ija.ija2016.reversi.ai;

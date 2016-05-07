@@ -1,7 +1,7 @@
 /**
- * 
+ * Class Disk represents one disk on board
  * @author Patrik Segedy
- * @author Tibor Dudl·k
+ * @author Tibor Dudl√°k
  */
 package ija.ija2016.reversi.board;
 
@@ -12,8 +12,8 @@ public class Disk implements java.io.Serializable {
 	private boolean isFreezed;
 
 	/**
-	 * 
-	 * @param isWhite
+	 * Constructor of disk
+	 * @param isWhite color of disk
 	 */
 	public Disk(boolean isWhite) {
 		this.isWhite = isWhite;
@@ -21,7 +21,7 @@ public class Disk implements java.io.Serializable {
 	}	
 	
 	/**
-	 * 
+	 * Method to change disk's color
 	 */
 	public void turn() {
 		if (isWhite == true)
@@ -31,24 +31,26 @@ public class Disk implements java.io.Serializable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Method returns disk's color
+	 * @param <code>true</code> when disk is white;
+     *        <code>false</code> otherwise.
 	 */
 	public boolean isWhite() {
 		return isWhite;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Method returns disk's freezing status
+	 * @param <code>true</code> when disk is freezed;
+     *        <code>false</code> otherwise.
 	 */
 	public boolean isFreezed() {
 		return isFreezed;
 	}
 	
 	/**
-	 * 
-	 * @param isFreezed
+	 * Setter on freezing option on actual disk
+	 * @param isFreezed is information whether disk is freezed or not
 	 */
 	public void freezeDisk(boolean isFreezed) {
 		this.isFreezed = isFreezed;
