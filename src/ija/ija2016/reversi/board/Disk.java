@@ -1,19 +1,28 @@
+/**
+ * 
+ * @author Patrik Segedy
+ * @author Tibor Dudlák
+ */
 package ija.ija2016.reversi.board;
 
 public class Disk implements java.io.Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3166896002752168247L;
 	private boolean isWhite;
 	private boolean isFreezed;
 
+	/**
+	 * 
+	 * @param isWhite
+	 */
 	public Disk(boolean isWhite) {
 		this.isWhite = isWhite;
 		isFreezed = false;
 	}	
 	
+	/**
+	 * 
+	 */
 	public void turn() {
 		if (isWhite == true)
 			isWhite = false;
@@ -21,14 +30,26 @@ public class Disk implements java.io.Serializable {
 			isWhite = true;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isWhite() {
 		return isWhite;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isFreezed() {
 		return isFreezed;
 	}
 	
+	/**
+	 * 
+	 * @param isFreezed
+	 */
 	public void freezeDisk(boolean isFreezed) {
 		this.isFreezed = isFreezed;
 	}
