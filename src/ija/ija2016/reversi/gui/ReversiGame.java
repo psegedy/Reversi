@@ -50,6 +50,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	
 	/**
 	 * 
+	 * 
 	 */
 	private static final long serialVersionUID = 8291243908727050910L;
 	private int size;
@@ -98,7 +99,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	}
 
 	/**
-	 * Create the frame.
+	 * Creates menu frame.
 	 */
 	public ReversiGame(ReversiMenu menu) {
 		
@@ -426,6 +427,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 			game.nextPlayer();
 				
 			JOptionPane.showMessageDialog(contentPane,
+				"Player "+
 				switchedPlayer.toString()+" have no legal move\n"
 				+" Switched to player: " + game.currentPlayer().toString(),
 				"Switched player", JOptionPane.WARNING_MESSAGE);

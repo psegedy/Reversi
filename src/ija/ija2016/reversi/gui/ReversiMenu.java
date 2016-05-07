@@ -1,3 +1,12 @@
+/**
+ * Class including method main
+ * Extends JFrame
+ * Draws main menu and options menu
+ * Starting new and loaded game
+ * @author Patrik Segedy 
+ * @author Tibor Dudlák
+ */
+
 package ija.ija2016.reversi.gui;
 
 import java.awt.Font;
@@ -13,9 +22,6 @@ import javax.swing.*;
 
 public class ReversiMenu extends JFrame{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6491712156407424473L;
 
 	private static ReversiMenu menu;
@@ -66,34 +72,29 @@ public class ReversiMenu extends JFrame{
 	private JRadioButton rdbtn8x8;
 	private JRadioButton rdbtn10x10;
 	private JRadioButton rdbtn12x12;
+	private JScrollBar scBarCount;	
+	private JScrollBar scBarFor;	
+	private JScrollBar scBarAfter;	
 	
-	
-	JScrollBar scBarCount;	
-	JScrollBar scBarFor;	
-	JScrollBar scBarAfter;	
-	
+	/**
+	 * Method main.
+	 * Contains listeners on all main menu panel buttons.
+	 * @param args is not used
+	 */
 	public static void main(String[] args) {
 		
 		menu = new ReversiMenu();
 		
 		menu.btnNewGameButton.addMouseListener(new MouseAdapter() {
+			/* ON CLICK ON NEW GAME BUTTON */
 			public void mouseClicked(MouseEvent e) {
 				ReversiGame game = new ReversiGame(menu);
 				Thread t = new Thread(game);
 				t.start();
-				/* ON CLICK ON NEW GAME BUTTON */
-				/* ***********************************************************	
-				 *  int BoardSize()	returns size;		
-				 *	boolean VsPlayer()returns vsPlayer;
-				 *  boolean IsDifficultyEasy()	returns true(easy) false(hard);
-				 *  FreezeEnable() returns freeze;
-				 *	int FreezeFor() returns Value(seconds);
-				 *	int FreezeAfter() returns Value(seconds);
-				 *	int FreezeCount() returns getValue(count of disks);
-				 **************************************************************/
-				// TODO
+				
 			}
 		});
+		
 		menu.btnLoadGameButton.addMouseListener(new MouseAdapter() {
 			private JFileChooser fc;
 			
@@ -121,8 +122,28 @@ public class ReversiMenu extends JFrame{
 	            }
 			}
 		});
+		
+		menu.btnOptionsButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				/* OPNENING OPTIONS */
+				menu.OpenOptions();
+			}
+		});
+		
+		menu.btnExitGameButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				/* EXITING MENU */
+				System.exit(0);
+			}
+		});
+		
 	}
 	
+	
+	/**
+	 * Constructor of entire Jframe
+	 */
 	public ReversiMenu() {
 		/* Constructor of JFrame */
 		super("Reversi - Menu");
@@ -131,7 +152,7 @@ public class ReversiMenu extends JFrame{
 		/* GAME LABEL REVERSI */	
 		labelREVERSI = new JLabel("R E V E R S I");
 		labelREVERSI.setForeground(new Color(255, 255, 255));
-		labelREVERSI.setFont(new Font("Dialog", Font.BOLD, 33));
+		labelREVERSI.setFont(new Font("Dialog", Font.BOLD, 29));
 		labelREVERSI.setBounds(50, 25, 200, 30);
 		
 		/* SETTING UP MENU */			
@@ -162,7 +183,7 @@ public class ReversiMenu extends JFrame{
 
 		labelOPT = new JLabel("O P T I O N S");
 		labelOPT.setForeground(new Color(255, 255, 255));
-		labelOPT.setFont(new Font("Dialog", Font.BOLD, 33));
+		labelOPT.setFont(new Font("Dialog", Font.BOLD, 29));
 		labelOPT.setBounds(50, 25, 200, 30);
 		
 		/* INNITIALIZATION OF LABEL SIZE */
@@ -222,7 +243,7 @@ public class ReversiMenu extends JFrame{
 		btnFreezOff.setBounds(235, 130, 50, 20);
 		btnFreezOn = new JButton("ON");
 		btnFreezOn.setBackground(Color.WHITE);
-		btnFreezOn.setFont(new Font("Dialog", Font.BOLD, 8));
+		btnFreezOn.setFont(new Font("Dialog", Font.BOLD, 7));
 		btnFreezOn.setBounds(185, 130, 50, 20);
 		
 		
@@ -294,7 +315,7 @@ public class ReversiMenu extends JFrame{
 		btnExitGameButton.setBounds(151, 200, 99, 50);
 		
 		
-		/*************************************************************/
+		/* ********************************************************** */
 
 		/* INITIALIZATION OF RADIO BUTTONS */
 		rdbtn6x6 = new JRadioButton("6x6");
@@ -369,25 +390,9 @@ public class ReversiMenu extends JFrame{
 		this.getContentPane().add(menuPanel);
 		this.repaint();
 		
-		
-		this.btnOptionsButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				/* OPNENING OPTIONS */
-				OpenOptions();
-			}
-		});
-		
-		
-		this.btnExitGameButton.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				/* EXITING MENU */
-				System.exit(0);
-			}
-		});
-		
+				
 		/* OPTIONS EVENTS */
-		/*************************************************************/
+		/* ********************************************************* */
 		/* SWITCHING PANELS OPTIONS */
 		
 		btnSet.addMouseListener(new MouseAdapter() {
@@ -398,7 +403,7 @@ public class ReversiMenu extends JFrame{
 
 		});		
 		
-		/*************************************************************/
+		/* ********************************************************* */ 
 		/* SWITCH GAME MODE */
 		
 		btnAiOn.addMouseListener(new MouseAdapter() {
@@ -416,7 +421,7 @@ public class ReversiMenu extends JFrame{
 			}
 		});
 		
-		/*************************************************************/
+		/* ********************************************************* */
 		/* SWITCHING GAME DIFFICULTY IF AI IS SET AS OPONENT */
 		
 		btnEasy.addMouseListener(new MouseAdapter() {
@@ -442,7 +447,7 @@ public class ReversiMenu extends JFrame{
 			}
 		});
 		
-		/*************************************************************/
+		/* ********************************************************* */
 		/* SWITCHING FREEZING OPTIONS */
 		
 		btnFreezOn.addMouseListener(new MouseAdapter() {
@@ -483,9 +488,13 @@ public class ReversiMenu extends JFrame{
 	            }
 	      });
 		
-		/*************************************************************/
+		/* ********************************************************* */
 	}
 	
+	/**
+	 * Method for showing objects associated 
+	 * with option game mode on panel options.
+	 */
 	private void ShowDiffic(){
 		
 		btnAiOn.setBackground(Color.CYAN);
@@ -498,8 +507,10 @@ public class ReversiMenu extends JFrame{
 		btnAiOff.setBackground(Color.WHITE);
 	}
 	
-	
-	
+	/**
+	 * Method for hiding objects associated 
+	 * with option game mode on panel options.
+	 */
 	private void HideDiffic(){
 		
 		btnAiOff.setBackground(Color.CYAN);
@@ -512,6 +523,10 @@ public class ReversiMenu extends JFrame{
 		btnAiOn.setBackground(Color.WHITE);
 	}
 	
+	/**
+	 * Method for showing objects associated 
+	 * with option freeze on panel options.
+	 */
 	private void ShowFreeze(){
 		
 		btnFreezOn.setBackground(Color.CYAN);
@@ -527,6 +542,10 @@ public class ReversiMenu extends JFrame{
 		scBarAfter.setVisible(true);
 	}
 	
+	/**
+	 * Method for hiding objects associated 
+	 * with option freeze on panel options.
+	 */
 	private void HideFreeze(){
 		
 		btnFreezOff.setBackground(Color.CYAN);
@@ -542,6 +561,9 @@ public class ReversiMenu extends JFrame{
 		scBarAfter.setVisible(false);
 	}
 	
+	/**
+	 * Method for redrawing option panel in menu frame
+	 */
 	private void OpenOptions(){
 		
 		this.getContentPane().removeAll();
@@ -550,6 +572,10 @@ public class ReversiMenu extends JFrame{
 		this.repaint();
 	}
 	
+	/**
+	 * Method for redrawing menu frame and setting 
+	 * size of board selected in options 
+	 */
 	private void ExitOptions(){
 		
 		this.getContentPane().removeAll();
@@ -563,47 +589,106 @@ public class ReversiMenu extends JFrame{
 		if (rdbtn6x6.isSelected()) this.size = 6;
 
 	}
-
-
 	
 	/* GETTERS FOR BOARD TO INITIALIZE GAME */
 	
+	/**
+	 * Method returning size of board selected in options.
+	 * @return size of board
+	 * 		   Default value of size is 8.
+	 */
 	public int getBoardSize(){
 		return size;		
 	}
 	
+	/**
+	 * Method returning player 2 opponent selected in options.
+	 * Default
+	 * @return <code>true</code> when human is set;
+     *         <code>false</code> when simple AI is set.
+     *         Default is true.
+	 */
 	public boolean getVsPlayer(){
 		return vsPlayer;
 	}
-
+	
+	/**
+	 * Method returning AI difficulty selected in options.
+	 * @return <code>true</code> when easy is set;
+     *         <code>false</code> when hard is set.
+     *         Default is true.
+	 */
 	public boolean getIsDifficultyEasy(){
 		return easy;
 	}
 	
+	/**
+	 * Method returning freezing option selected in options.
+	 * @return <code>true</code> when freezing is enabled;
+     *         <code>false</code> when freezing is disabled.
+     *         Default is false.
+	 */
 	public boolean getFreezeEnable(){
 		return freeze;
 	}
 	
+	/**
+	 * Method returning upper border of interval. 
+	 * From this interval is generated random number,
+	 * which represents time in seconds for these disks 
+	 * to be freezed for.
+	 * @return size of board
+	 * 		   Default is 10.
+	 */
 	public int getFreezeFor(){
 		return scBarFor.getValue();
 	}
 	
+	/**
+	 * Method returning upper border of interval. 
+	 * From this interval is generated random number,
+	 * which represents time in seconds after  disks 
+	 * are about to freeze.
+	 * @return size of board
+	 * 		   Default is 5.
+	 */
 	public int getFreezeAfter(){
 		return scBarAfter.getValue();
 	}
 	
+	/**
+	 * Method returning desired count of disks to freeze. 
+	 * @return count of disks
+	 * 		   Default is 2
+	 */
 	public int getFreezeCount(){
 		return scBarCount.getValue();
 	}
 	
+	/**
+	 * Method returning information that represent 
+	 * whether game was loaded or not.
+	 * @return <code>true</code> when game was loaded;
+     *         <code>false</code> when game was not loaded.
+     *         Default is false.
+	 */
 	public boolean isGameLoaded() {
 		return gameLoaded;
 	}
-
+	
+	/**
+	 * Method returning file path to saved game. 
+	 * @return file path.
+	 */
 	public String getFilepath() {
 		return filepath;
 	}
 	
+	/**
+	 * Method setting information that represent 
+	 * whether game was loaded or not.
+	 * @param gameLoaded	represents information.
+	 */
 	public static void setGameLoaded(boolean gameLoaded) {
 		ReversiMenu.gameLoaded = gameLoaded;
 	}
