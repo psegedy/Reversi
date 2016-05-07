@@ -4,7 +4,7 @@
  * Draws main menu and options menu
  * Starting new and loaded game
  * @author Patrik Segedy 
- * @author Tibor Dudl·k
+ * @author Tibor Dudl√°k
  */
 
 package ija.ija2016.reversi.gui;
@@ -163,10 +163,10 @@ public class ReversiMenu extends JFrame{
 		this.setVisible(true);
 		
 		/* AUTHORS LABEL */
-		labelNAMES = new JLabel("by Patrik Segedy & Tibor Dudl·k");
+		labelNAMES = new JLabel("by Patrik Segedy & Tibor Dudl√°k");
 		labelNAMES.setForeground(Color.WHITE);
-		labelNAMES.setFont(new Font("Dialog", Font.BOLD, 11));
-		labelNAMES.setBounds(110, 270, 210, 15);
+		labelNAMES.setFont(new Font("Dialog", Font.BOLD, 10));
+		labelNAMES.setBounds(100, 270, 210, 15);
 		
 		/* INNITIALIZATION OF NEW GAME BUTTON */
 		btnNewGameButton = new JButton("New Game");
@@ -183,20 +183,20 @@ public class ReversiMenu extends JFrame{
 		/* INNITIALIZATION OF LABEL OPTIONS */
 		labelOPT = new JLabel("O P T I O N S");
 		labelOPT.setForeground(new Color(255, 255, 255));
-		labelOPT.setFont(new Font("Dialog", Font.BOLD, 29));
+		labelOPT.setFont(new Font("Dialog", Font.BOLD, 27));
 		labelOPT.setBounds(50, 25, 200, 30);
 		
 		/* INNITIALIZATION OF LABEL SIZE */
 		lblBoardSize = new JLabel("Board size:");
 		lblBoardSize.setForeground(Color.WHITE);
-		lblBoardSize.setFont(new Font("Dialog", Font.ITALIC, 13));
+		lblBoardSize.setFont(new Font("Dialog", Font.ITALIC, 12));
 		lblBoardSize.setBounds(30, 130, 100, 20);
 		
 		
 		/* INITIALIZATION OF LABEL GAME MODE*/
 		lblGame = new JLabel("Game mode PL vs:");
 		lblGame.setForeground(Color.WHITE);
-		lblGame.setFont(new Font("Dialog", Font.ITALIC, 13));
+		lblGame.setFont(new Font("Dialog", Font.ITALIC, 12));
 		lblGame.setBounds(30, 70, 150, 20);
 		/* INITIALIZATION OF BUTTONS ASSOCIATED WITH AI CHOOSING */
 		btnAiOn = new JButton("PC");
@@ -213,7 +213,7 @@ public class ReversiMenu extends JFrame{
 		/* INITIALIZATION OF LABEL DIFFICULTY*/
 		lblDiff = new JLabel("Difficulty:");
 		lblDiff.setForeground(Color.WHITE);
-		lblDiff.setFont(new Font("Dialog", Font.ITALIC, 13));
+		lblDiff.setFont(new Font("Dialog", Font.ITALIC, 12));
 		lblDiff.setBounds(30, 100, 150, 20);
 		/* INITIALIZATION OF BUTTONS ASSOCIATED WITH DIFFICULTY */
 		btnEasy = new JButton("EASY");
@@ -230,17 +230,17 @@ public class ReversiMenu extends JFrame{
 		/* INITIALIZATION OF LABEL FREEZE*/
 		lblFreezing = new JLabel("Freezing:");
 		lblFreezing.setForeground(Color.WHITE);
-		lblFreezing.setFont(new Font("Dialog", Font.ITALIC, 13));
+		lblFreezing.setFont(new Font("Dialog", Font.ITALIC, 11));
 		lblFreezing.setBounds(130, 130, 150, 20);
 		/* INITIALIZATION OF BUTTONS ASSOCIATED WITH FREEZE*/
 		btnFreezOff = new JButton("OFF");
-		btnFreezOff.setFont(new Font("Dialog", Font.BOLD, 8));
+		btnFreezOff.setFont(new Font("Dialog", Font.BOLD, 7));
 		btnFreezOff.setBackground(Color.CYAN);
 		btnFreezOff.setEnabled(false);
 		btnFreezOff.setBounds(235, 130, 50, 20);
 		btnFreezOn = new JButton("ON");
 		btnFreezOn.setBackground(Color.WHITE);
-		btnFreezOn.setFont(new Font("Dialog", Font.BOLD, 7));
+		btnFreezOn.setFont(new Font("Dialog", Font.BOLD, 8));
 		btnFreezOn.setBounds(185, 130, 50, 20);
 		
 		
@@ -256,7 +256,7 @@ public class ReversiMenu extends JFrame{
 		/* LABEL COUNT */
 		lblCount = new JLabel("Disks: "+scBarCount.getValue());
 		lblCount.setForeground(Color.WHITE);
-		lblCount.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblCount.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblCount.setBounds(130, 155, 150, 20);
 		lblCount.setVisible(false);		
 		
@@ -273,7 +273,7 @@ public class ReversiMenu extends JFrame{
 		/* LABEL COUNT */
 		lblFor = new JLabel("For 0 ~ "+scBarFor.getValue()+"s");
 		lblFor.setForeground(Color.WHITE);
-		lblFor.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblFor.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblFor.setBounds(130, 180, 150, 20);
 		lblFor.setVisible(false);
 		
@@ -290,7 +290,7 @@ public class ReversiMenu extends JFrame{
 		/* LABEL AFTER */
 		lblAfter = new JLabel("After 0 ~ "+scBarAfter.getValue()+"s");
 		lblAfter.setForeground(Color.WHITE);
-		lblAfter.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblAfter.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblAfter.setBounds(130, 205, 150, 20);
 		lblAfter.setVisible(false);
 		

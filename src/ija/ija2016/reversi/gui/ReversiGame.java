@@ -6,7 +6,7 @@
  * Mouse listener event triggers functionality of game 
  * cycle while running
  * @author Patrik Segedy 
- * @author Tibor Dudl·k
+ * @author Tibor Dudl√°k
  */
 
 package ija.ija2016.reversi.gui;
