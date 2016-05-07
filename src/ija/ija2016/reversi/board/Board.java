@@ -1,3 +1,8 @@
+/**
+ * Class 
+ * @author Patrik Segedy 
+ * @author Tibor Dudlák
+ */
 package ija.ija2016.reversi.board;
 
 public class Board implements java.io.Serializable {

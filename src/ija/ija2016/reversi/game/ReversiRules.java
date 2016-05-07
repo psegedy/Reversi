@@ -1,7 +1,7 @@
 /**
  * Class ReversiRules stores size of board and creates it
  * @author Patrik Segedy 
- * @author Tibor Dudl√°k
+ * @author Tibor Dudl·k
  */
 package ija.ija2016.reversi.game;
 
