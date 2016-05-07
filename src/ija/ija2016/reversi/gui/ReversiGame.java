@@ -123,6 +123,8 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
         game.addPlayer(p2);
         
         fc = new JFileChooser();
+        File workingDirectory = new File(System.getProperty("user.dir") + System.getProperty("file.separator")+ "examples");
+        fc.setCurrentDirectory(workingDirectory);
         r = new Random();
         timer = new Timer();
         
