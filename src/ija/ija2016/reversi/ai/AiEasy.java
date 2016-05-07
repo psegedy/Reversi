@@ -1,3 +1,9 @@
+/**
+ * Class AiEasy implements Interface Ai
+ * @author Patrik Segedy 
+ * @author Tibor Dudlák
+ */
+
 package ija.ija2016.reversi.ai;
 
 import java.util.ArrayList;
@@ -9,6 +15,12 @@ import ija.ija2016.reversi.game.Game;
 
 public class AiEasy implements Ai{
 	
+	/**
+	 * Method makeMove take parameter game and changes 
+	 * it by putting disk on random boardField
+	 * @param actual game
+	 * @return changed game
+	 */
 	public Game makeMove(Game game) {
 		
 		boolean color = game.currentPlayer().isWhite();
