@@ -1,6 +1,13 @@
+/**
+ * Class AiHard implements Interface Ai
+ * @author Patrik Segedy 
+ * @author Tibor Dudlák
+ */
+
 package ija.ija2016.reversi.ai;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import ija.ija2016.reversi.board.Disk;
 import ija.ija2016.reversi.board.Field;
@@ -8,6 +15,13 @@ import ija.ija2016.reversi.game.Game;
 
 public class AiHard implements Ai{
 	
+	/**
+	 * Method makeMove take parameter game and changes 
+	 * it by putting disk on random boardField by field 
+	 * priorities and with actual player color
+	 * @param actual game
+	 * @return changed game
+	 */
 	public Game makeMove(Game game) {
 		
 		boolean color = game.currentPlayer().isWhite();
@@ -18,6 +32,7 @@ public class AiHard implements Ai{
 		allPriorities = setPriorities(size);
 		
 		ArrayList<Field> fields = new ArrayList<Field>();
+		ArrayList<Field> result = new ArrayList<Field>();
 		ArrayList<Integer> weight = new ArrayList<Integer>();
 		
 		for (int row = 1; row <= size; row++) {
@@ -28,23 +43,39 @@ public class AiHard implements Ai{
 				}
 			}
 		}
-		int i = 0;
-		int index = 0;
-		int prio = 0;
-		for(int w : weight){
-			i++;
-			if (w>prio) {
-				index = i;
-			}
-		}
-		System.out.println(fields.size()+" "+ index +" "+ weight.size() +" ");
+
 		if (fields.size()!=0) {
-			fields.get(index-1).putDisk(disk);
+			
+			int index = 0;
+			int prio = 0;
+			for(int w : weight){
+				System.out.println(w);
+				if (w>prio) {
+					prio = w;
+					result.clear();
+					result.add(fields.get(index) );
+				} else if (w==prio) {
+					result.add(fields.get(index) );
+				} 
+				index ++;
+			}
+			Random number = new Random();
+			System.out.println((result.size()));
+			
+			result.get(number.nextInt(result.size())).putDisk(disk);
 		}
+		
 		game.nextPlayer();
 		return game;
 	}
 
+	/**
+	 * Method setPriorities take parameter size and 
+	 * create array with field priorities  for each 
+	 * field on board 
+	 * @param board size
+	 * @return priorities
+	 */
 	public int[][] setPriorities(int size) {
 		
 		int Priorities[][] = new int[size][size];
