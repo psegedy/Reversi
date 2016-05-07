@@ -1,6 +1,6 @@
 /**
  * Class cell represents one cell/field at game board
- * 
+ * Drawing board's cells onto frame's panel  
  * @author Patrik Segedy 
  * @author Tibor Dudlák
  */
