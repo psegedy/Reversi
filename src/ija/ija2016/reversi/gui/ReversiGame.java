@@ -1,3 +1,14 @@
+/**
+ * Class ReversiGame
+ * Uses ReversiMenu getters to set up desired game options
+ * Creates Board and Fields on it and initializes them
+ * Implements mouse listener on every cell object
+ * Mouse listener event triggers functionality of game 
+ * cycle while running
+ * @author Patrik Segedy 
+ * @author Tibor Dudlák
+ */
+
 package ija.ija2016.reversi.gui;
 
 import java.awt.BorderLayout;
@@ -48,10 +59,7 @@ import java.util.Timer;
 
 public class ReversiGame extends JFrame implements MouseListener, Runnable, ActionListener, Serializable{
 	
-	/**
-	 * 
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 8291243908727050910L;
 	private int size;
 	private JPanel contentPane;
@@ -83,9 +91,9 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	private Timer timer;
 
 	/**
-	 * Launch the application.
+	 * Method run 
+	 * Launching the application.
 	 */
-	
 	@Override
 	public void run() {
 		try {
@@ -99,7 +107,9 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	}
 
 	/**
-	 * Creates menu frame.
+	 * Constructor of ReversiGame
+	 * Uses menu to get desired options of game
+	 * @param menu stores options of game
 	 */
 	public ReversiGame(ReversiMenu menu) {
 		
@@ -257,6 +267,12 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 		
 	}
 	
+	/**
+	 * Method for serializing objects
+	 * @param o object to serialize
+	 * @param filepath of output file
+	 * @exception IO Exception
+	 */
 	private void serialize(Object o, String filepath) {
         try
         {
@@ -271,9 +287,12 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
             i.printStackTrace();
         }
 	}
+	
 	/**
-	 * Deserialize object from file
+	 * Method to deserialize object from file
 	 * @param filepath path to the file
+	 * @exception IO Exception 
+	 * @exception Class not found
 	 */
 	public void deserialize(String filepath) {
 		try
@@ -295,6 +314,10 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	      }
 	}
 	
+	/**
+	 * Method for creating grid at the frame of game
+	 * @param game is set up game from menu parameters
+	 */
 	private void setGrid(Game game) {
 		JPanel panel = new JPanel();
 		int count = 0;
@@ -319,6 +342,9 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	    contentPane.add(panel);
 	}
 	
+	/**
+	 * Method for printing score on panel's labels
+	 */
 	public void printScore() {
 		wCount = 0;
 		bCount = 0;
@@ -339,6 +365,9 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 			lblTurn.setText("Turn: Black");
 	}
 	
+	/**
+	 * Method for freezing disks
+	 */
 	public void freeze() {
 		//nrFreezed
 		//freezeFor
@@ -363,6 +392,11 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 		}	
 	}
 	
+	/**
+	 * Method to find out that game is over
+	 * @return <code>true</code> when game is over;
+     *         <code>false</code> otherwise.
+	 */
 	public boolean isGameOver() {
 		if ((wCount + bCount) == (size*size))
 			return true;
@@ -377,6 +411,12 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 		return true;	
 	}
 	
+	/**
+	 * Method to find out that player has any legal move
+	 * @param player
+	 * @return <code>true</code> when player has move;
+     *         <code>false</code> otherwise.
+	 */
 	public boolean switchPlayer(Player player) {
 		for (int i = 1; i <= size; i++) {
 			for (int j = 1; j <= size; j++) {
