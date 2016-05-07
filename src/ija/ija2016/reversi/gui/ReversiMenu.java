@@ -103,6 +103,8 @@ public class ReversiMenu extends JFrame{
 				/* ON CLICK ON LOAD GAME BUTTON */
 				gameLoaded = true;
 				fc = new JFileChooser();
+		        File workingDirectory = new File(System.getProperty("user.dir") + System.getProperty("file.separator")+ "examples");
+		        fc.setCurrentDirectory(workingDirectory);
 				int returnVal = fc.showOpenDialog(menu);
 	            if (returnVal == JFileChooser.APPROVE_OPTION) {
 	                File file = null;
