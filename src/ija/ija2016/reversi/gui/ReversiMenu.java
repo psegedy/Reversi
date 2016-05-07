@@ -142,9 +142,8 @@ public class ReversiMenu extends JFrame{
 		
 	}
 	
-	
 	/**
-	 * Constructor of entire Jframe of menu as reversiMenu
+	 * Constructor of entire Frame of menu as reversiMenu
 	 */
 	public ReversiMenu() {
 		/* Constructor of JFrame */
@@ -172,17 +171,16 @@ public class ReversiMenu extends JFrame{
 		/* INNITIALIZATION OF NEW GAME BUTTON */
 		btnNewGameButton = new JButton("New Game");
 		btnNewGameButton.setBounds(50, 60, 200, 50);
-
 		
 		/* INNITIALIZATION OF LOAD GAME BUTTON */
 		btnLoadGameButton = new JButton("Load Game");
 		btnLoadGameButton.setBounds(50, 130, 200, 50);
 		
-		
 		/* INNITIALIZATION OF OPTIONS BUTTON */
 		btnOptionsButton = new JButton("Options");
 		btnOptionsButton.setBounds(50, 200, 99, 50);
-
+		
+		/* INNITIALIZATION OF LABEL OPTIONS */
 		labelOPT = new JLabel("O P T I O N S");
 		labelOPT.setForeground(new Color(255, 255, 255));
 		labelOPT.setFont(new Font("Dialog", Font.BOLD, 29));
@@ -193,7 +191,6 @@ public class ReversiMenu extends JFrame{
 		lblBoardSize.setForeground(Color.WHITE);
 		lblBoardSize.setFont(new Font("Dialog", Font.ITALIC, 13));
 		lblBoardSize.setBounds(30, 130, 100, 20);
-				
 		
 		
 		/* INITIALIZATION OF LABEL GAME MODE*/
@@ -201,7 +198,7 @@ public class ReversiMenu extends JFrame{
 		lblGame.setForeground(Color.WHITE);
 		lblGame.setFont(new Font("Dialog", Font.ITALIC, 13));
 		lblGame.setBounds(30, 70, 150, 20);
-		
+		/* INITIALIZATION OF BUTTONS ASSOCIATED WITH AI CHOOSING */
 		btnAiOn = new JButton("PC");
 		btnAiOn.setFont(new Font("Dialog", Font.BOLD, 8));
 		btnAiOn.setBackground(Color.CYAN);
@@ -218,7 +215,7 @@ public class ReversiMenu extends JFrame{
 		lblDiff.setForeground(Color.WHITE);
 		lblDiff.setFont(new Font("Dialog", Font.ITALIC, 13));
 		lblDiff.setBounds(30, 100, 150, 20);
-		
+		/* INITIALIZATION OF BUTTONS ASSOCIATED WITH DIFFICULTY */
 		btnEasy = new JButton("EASY");
 		btnEasy.setFont(new Font("Dialog", Font.PLAIN, 8));
 		btnEasy.setBackground(Color.CYAN);
@@ -231,13 +228,11 @@ public class ReversiMenu extends JFrame{
 		
 		
 		/* INITIALIZATION OF LABEL FREEZE*/
-		
 		lblFreezing = new JLabel("Freezing:");
 		lblFreezing.setForeground(Color.WHITE);
 		lblFreezing.setFont(new Font("Dialog", Font.ITALIC, 13));
 		lblFreezing.setBounds(130, 130, 150, 20);
-		
-		
+		/* INITIALIZATION OF BUTTONS ASSOCIATED WITH FREEZE*/
 		btnFreezOff = new JButton("OFF");
 		btnFreezOff.setFont(new Font("Dialog", Font.BOLD, 8));
 		btnFreezOff.setBackground(Color.CYAN);
@@ -249,9 +244,7 @@ public class ReversiMenu extends JFrame{
 		btnFreezOn.setBounds(185, 130, 50, 20);
 		
 		
-		
 		/* INITIALIZATION OF LABEL COUNT AND ITS SCROLLBAR*/
-		
 		/* SCROLL BAR FOR COUNT OF DISKS TO FREEZE */
 		scBarCount = new JScrollBar(JScrollBar.HORIZONTAL, 2, 1, 2, 7);
 		scBarCount.setBounds(205, 155, 80, 17);
@@ -260,18 +253,16 @@ public class ReversiMenu extends JFrame{
 		scBarCount.setMaximum(7);
 		scBarCount.setBlockIncrement(1);
 		scBarCount.setValue(2);
-		
-		
 		/* LABEL COUNT */
 		lblCount = new JLabel("Disks: "+scBarCount.getValue());
 		lblCount.setForeground(Color.WHITE);
 		lblCount.setFont(new Font("Dialog", Font.PLAIN, 13));
 		lblCount.setBounds(130, 155, 150, 20);
-		lblCount.setVisible(false);
+		lblCount.setVisible(false);		
 		
 		
 		/* INITIALIZATION OF LABEL FOR  AND ITS SCROLLBAR*/
-		
+		/* SCROLLBAR FOR */ 
 		scBarFor = new JScrollBar(JScrollBar.HORIZONTAL, 2, 1, 2, 7);
 		scBarFor.setBounds(205, 180, 80, 17);
 		scBarFor.setVisible(false);
@@ -279,10 +270,7 @@ public class ReversiMenu extends JFrame{
 		scBarFor.setMaximum(121);
 		scBarFor.setBlockIncrement(1);
 		scBarFor.setValue(10);
-
-		
 		/* LABEL COUNT */
-		
 		lblFor = new JLabel("For 0 ~ "+scBarFor.getValue()+"s");
 		lblFor.setForeground(Color.WHITE);
 		lblFor.setFont(new Font("Dialog", Font.PLAIN, 13));
@@ -291,7 +279,7 @@ public class ReversiMenu extends JFrame{
 		
 		
 		/* INITIALIZATION OF LABEL AFTER AND ITS SCROLLBAR*/
-		
+		/* SCROLLBAR AFTER */
 		scBarAfter = new JScrollBar(JScrollBar.HORIZONTAL, 2, 1, 2, 7);
 		scBarAfter.setBounds(205, 205, 80, 17);
 		scBarAfter.setVisible(false);
@@ -299,26 +287,23 @@ public class ReversiMenu extends JFrame{
 		scBarAfter.setMaximum(11);
 		scBarAfter.setBlockIncrement(1);
 		scBarAfter.setValue(5);
-		
+		/* LABEL AFTER */
 		lblAfter = new JLabel("After 0 ~ "+scBarAfter.getValue()+"s");
 		lblAfter.setForeground(Color.WHITE);
 		lblAfter.setFont(new Font("Dialog", Font.PLAIN, 13));
 		lblAfter.setBounds(130, 205, 150, 20);
 		lblAfter.setVisible(false);
 		
-		
 		/* INNITIALIZATION OF BUTTON IN OPTIONS */	
 		btnSet = new JButton("SET !");
 		btnSet.setBounds(100, 250, 100, 30);
-		
 
 		/* INITIALIZATION OF EXIT BUTTON */
 		btnExitGameButton = new JButton("Exit");
 		btnExitGameButton.setBounds(151, 200, 99, 50);
 		
-		
 		/* ********************************************************** */
-
+		
 		/* INITIALIZATION OF RADIO BUTTONS */
 		rdbtn6x6 = new JRadioButton("6x6");
 		rdbtn6x6.setBackground(new Color(0, 128, 0));
@@ -340,8 +325,7 @@ public class ReversiMenu extends JFrame{
 		rdbtn12x12.setBackground(new Color(0, 128, 0));
 		rdbtn12x12.setForeground(Color.WHITE);
 		rdbtn12x12.setBounds(30, 210, 65, 20);
-		
-		
+				
 		/* GETTING RADIO BUTTONS INTO ONE GROUP */
 		ButtonGroup OptButtonGroup = new ButtonGroup(); 
 		OptButtonGroup.add(rdbtn6x6);
@@ -359,8 +343,7 @@ public class ReversiMenu extends JFrame{
 		menuPanel.add(btnLoadGameButton);
 		menuPanel.add(btnOptionsButton);
 		menuPanel.add(btnExitGameButton);
-		
-		
+			
 		optPanel = new JPanel();
 		optPanel.setLayout(null);
 		optPanel.setBackground(new Color(0, 128, 0));
@@ -387,11 +370,9 @@ public class ReversiMenu extends JFrame{
 		optPanel.add(scBarFor);
 		optPanel.add(lblAfter);
 		optPanel.add(scBarAfter);	
-		
-		
+			
 		this.getContentPane().add(menuPanel);
 		this.repaint();
-		
 				
 		/* OPTIONS EVENTS */
 		/* ********************************************************* */
