@@ -4,7 +4,7 @@
  * Draws main menu and options menu
  * Starting new and loaded game
  * @author Patrik Segedy 
- * @author Tibor Dudl√°k
+ * @author Tibor Dudl·k
  */
 
 package ija.ija2016.reversi.gui;
@@ -163,7 +163,7 @@ public class ReversiMenu extends JFrame{
 		this.setVisible(true);
 		
 		/* AUTHORS LABEL */
-		labelNAMES = new JLabel("by Patrik Segedy & Tibor Dudl√°k");
+		labelNAMES = new JLabel("by Patrik Segedy & Tibor Dudl·k");
 		labelNAMES.setForeground(Color.WHITE);
 		labelNAMES.setFont(new Font("Dialog", Font.BOLD, 10));
 		labelNAMES.setBounds(100, 270, 210, 15);

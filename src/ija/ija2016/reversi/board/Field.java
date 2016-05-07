@@ -1,3 +1,8 @@
+/**
+ * Interface 
+ * @author Patrik Segedy 
+ * @author Tibor Dudlák
+ */
 package ija.ija2016.reversi.board;
 
 public interface Field {
