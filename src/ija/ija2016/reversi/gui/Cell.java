@@ -1,10 +1,3 @@
-/**
- * Class cell represents one cell/field at game board
- * Drawing board's cells onto frame's panel  
- * @author Patrik Segedy 
- * @author Tibor Dudlák
- */
-
 package ija.ija2016.reversi.gui;
 
 import java.awt.Color;
@@ -21,7 +14,12 @@ import ija.ija2016.reversi.board.Field;
 
 import ija.ija2016.reversi.game.Game;
 import ija.ija2016.reversi.game.Player;
-
+/**
+ * Class cell represents one cell/field at game board
+ * Drawing board's cells onto frame's panel  
+ * @author Patrik Segedy 
+ * @author Tibor Dudlak
+ */
 public class Cell extends JPanel {
 
 	private static final long serialVersionUID = 5199856827210931513L;
@@ -33,9 +31,9 @@ public class Cell extends JPanel {
 	
 	/**
 	 * Constructor for cell takes game and position of actual field  
-	 * @param game is actual game
-	 * @param row of cell
-	 * @param col of cell
+	 * @param game - actual game
+	 * @param row - row of cell
+	 * @param col - col of cell
 	 */
 	public Cell (Game game, int row, int col) {
 		this.setPreferredSize(new Dimension(50,50));
@@ -72,7 +70,7 @@ public class Cell extends JPanel {
 	/**
 	 * Method actualizes entire game board 
 	 * which is re-draw on frame's panel  
-	 * @param game represent actual state of game
+	 * @param game - represent actual state of game
 	 */
 	public void actualize(Game game) {
 		this.game = game;
@@ -83,8 +81,8 @@ public class Cell extends JPanel {
 	
 	/**
 	 * Method to find out that field is empty
-	 * @return <code>true</code> when actual field is empty;
-     *         <code>false</code> otherwise.
+	 * @return <code>true</code> - when actual field is empty;
+     *         <code>false</code> - otherwise.
 	 */
 	public boolean isEmpty() {
 		if (this.disk == null)
@@ -95,8 +93,8 @@ public class Cell extends JPanel {
 	
 	/**
 	 * Method returns disk color
-	 * @return <code>true</code> when actual disk is white;
-     *         <code>false</code> otherwise.
+	 * @return <code>true</code> - when actual disk is white;
+     *         <code>false</code> - otherwise.
 	 */
 	public boolean isWhite() {
 		return disk.isWhite();
@@ -105,9 +103,9 @@ public class Cell extends JPanel {
 	/**
 	 * Method to put disk at actual position 
 	 * at board defined with row and column.
-	 * @param game represent actual state of game
-	 * @return <code>true</code> when putting disk was successful;
-     *         <code>false</code> otherwise.
+	 * @param game - represent actual state of game
+	 * @return <code>true</code> - when putting disk was successful;
+     *         <code>false</code> - otherwise.
 	 */
 	public boolean putDisk(Game game) {
 		if (game.currentPlayer().putDisk(game.getBoard().getField(row, col))) {
@@ -119,9 +117,9 @@ public class Cell extends JPanel {
 	/**
 	 * Method canPutDisk finds out that player can 
 	 * put disk at position defined with row and column.
-	 * @param game represent actual state of game
-	 * @return <code>true</code> when player can put disk;
-     *         <code>false</code> otherwise.
+	 * @param game - represent actual state of game
+	 * @return <code>true</code> - when player can put disk;
+     *         <code>false</code> - otherwise.
 	 */
 	public boolean canPutDisk(Game game) {
 		if (game.currentPlayer().canPutDisk(game.getBoard().getField(row, col))) {
@@ -132,8 +130,8 @@ public class Cell extends JPanel {
 	
 	/**
 	 * Method to set disk if freezed to freeze
-	 * @param game actual game
-	 * @param isFreezed parameter to disk's method freezeDisk
+	 * @param game - actual game
+	 * @param isFreezed - parameter to disk's method freezeDisk
 	 */
 	public void freeze(Game game, boolean isFreezed) {
 		game.getBoard().getField(row, col).getDisk().freezeDisk(isFreezed);

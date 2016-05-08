@@ -1,14 +1,13 @@
-/**
- * Class ReversiRules stores size of board and creates it
- * @author Patrik Segedy 
- * @author Tibor Dudlák
- */
 package ija.ija2016.reversi.game;
 
 import ija.ija2016.reversi.board.BoardField;
 import ija.ija2016.reversi.board.Field;
 import ija.ija2016.reversi.board.Rules;
-
+/**
+ * Class ReversiRules stores size of board and creates it
+ * @author Patrik Segedy 
+ * @author Tibor Dudlak
+ */
 public class ReversiRules implements Rules, java.io.Serializable {
 	
 	private static final long serialVersionUID = -6722133764844754960L;
@@ -16,7 +15,7 @@ public class ReversiRules implements Rules, java.io.Serializable {
 	
 	/**
 	 * Method to set size of board
-	 * @param size is size of board
+	 * @param - size : is size of board
 	 */
 	public ReversiRules(int size) {
 		this.size =  size;

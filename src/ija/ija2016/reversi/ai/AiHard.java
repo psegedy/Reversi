@@ -1,9 +1,3 @@
-/**
- * Class AiHard implements Interface Ai
- * @author Patrik Segedy 
- * @author Tibor Dudl√°k
- */
-
 package ija.ija2016.reversi.ai;
 
 import java.util.ArrayList;
@@ -13,13 +7,18 @@ import ija.ija2016.reversi.board.Disk;
 import ija.ija2016.reversi.board.Field;
 import ija.ija2016.reversi.game.Game;
 
+/**
+ * Class AiHard implements Interface Ai
+ * @author Patrik Segedy 
+ * @author Tibor Dudl·k
+ */
 public class AiHard implements Ai{
 	
 	/**
 	 * Method makeMove take parameter game and changes 
 	 * it by putting disk on random boardField by field 
 	 * priorities and with actual player color
-	 * @param actual game
+	 * @param game - actual game
 	 * @return changed game
 	 */
 	public Game makeMove(Game game) {
@@ -73,7 +72,7 @@ public class AiHard implements Ai{
 	 * Method setPriorities take parameter size and 
 	 * create array with field priorities  for each 
 	 * field on board 
-	 * @param board size
+	 * @param size - board size
 	 * @return priorities
 	 */
 	public int[][] setPriorities(int size) {

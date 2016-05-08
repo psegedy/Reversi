@@ -1,14 +1,3 @@
-/**
- * Class ReversiGame
- * Uses ReversiMenu getters to set up desired game options
- * Creates Board and Fields on it and initializes them
- * Implements mouse listener on every cell object
- * Mouse listener event triggers functionality of game 
- * cycle while running
- * @author Patrik Segedy 
- * @author Tibor Dudlák
- */
-
 package ija.ija2016.reversi.gui;
 
 import java.awt.BorderLayout;
@@ -56,7 +45,16 @@ import javax.swing.JSplitPane;
 import javax.swing.JSeparator;
 import java.awt.Insets;
 import java.util.Timer;
-
+/**
+ * Class ReversiGame
+ * Uses ReversiMenu getters to set up desired game options
+ * Creates Board and Fields on it and initializes them
+ * Implements mouse listener on every cell object
+ * Mouse listener event triggers functionality of game 
+ * cycle while running
+ * @author Patrik Segedy 
+ * @author Tibor Dudlak
+ */
 public class ReversiGame extends JFrame implements MouseListener, Runnable, ActionListener, Serializable{
 	
 	
@@ -109,7 +107,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	/**
 	 * Constructor of ReversiGame
 	 * Uses menu to get desired options of game
-	 * @param menu stores options of game
+	 * @param menu - stores options of game
 	 */
 	public ReversiGame(ReversiMenu menu) {
 		
@@ -269,9 +267,9 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	
 	/**
 	 * Method for serializing objects
-	 * @param o object to serialize
-	 * @param filepath of output file
-	 * @exception IO Exception
+	 * @param o - object to serialize
+	 * @param filepath - path of output file
+	 * @exception IOException
 	 */
 	private void serialize(Object o, String filepath) {
         try
@@ -290,9 +288,9 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	
 	/**
 	 * Method to deserialize object from file
-	 * @param filepath path to the file
-	 * @exception IO Exception 
-	 * @exception Class not found
+	 * @param filepath - path to the file
+	 * @exception IOException 
+	 * @exception ClassNotFoundExceprion
 	 */
 	public void deserialize(String filepath) {
 		try
@@ -316,7 +314,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	
 	/**
 	 * Method for creating grid at the frame of game
-	 * @param game is set up game from menu parameters
+	 * @param game - is set up game from menu parameters
 	 */
 	private void setGrid(Game game) {
 		JPanel panel = new JPanel();
@@ -394,8 +392,8 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	
 	/**
 	 * Method to find out that game is over
-	 * @return <code>true</code> when game is over;
-     *         <code>false</code> otherwise.
+	 * @return <code>true</code> - when game is over;
+     *         <code>false</code> - otherwise.
 	 */
 	public boolean isGameOver() {
 		if ((wCount + bCount) == (size*size))
@@ -414,8 +412,8 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
 	/**
 	 * Method to find out that player has any legal move
 	 * @param player
-	 * @return <code>true</code> when player has move;
-     *         <code>false</code> otherwise.
+	 * @return <code>true</code> - when player has move;
+     *         <code>false</code> - otherwise.
 	 */
 	public boolean switchPlayer(Player player) {
 		for (int i = 1; i <= size; i++) {
