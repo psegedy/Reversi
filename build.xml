@@ -14,7 +14,17 @@
         <mkdir dir="${build}" />
         <mkdir dir="${dest-client}"/>
         <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
-        
+        <javadoc packagenames="ija.ija2016.reversi.*"
+                 sourcepath="src"
+                 destdir="doc"
+                 version="true"
+                 windowtitle="Reversi"
+                 encoding="UTF-8"
+                 charset="UTF-8"
+                 docencoding="UTF-8">
+            <doctitle><![CDATA[<h1>Reversi Documentation</h1>]]></doctitle>
+            <bottom><![CDATA[<i>Copyright &#169; 2016 Patrik Segedy &amp Tibor Dudlak;. All Points Needed.</i>]]></bottom>
+        </javadoc>
         <jar destfile="${dest-client}/Reversi.jar" basedir="${build}">
             <manifest>
                 <attribute name="main-class" value="ija.ija2016.reversi.gui.ReversiMenu" />

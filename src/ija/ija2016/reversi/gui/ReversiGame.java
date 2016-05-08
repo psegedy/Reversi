@@ -6,7 +6,7 @@
  * Mouse listener event triggers functionality of game 
  * cycle while running
  * @author Patrik Segedy 
- * @author Tibor Dudlák
+ * @author Tibor Dudlak
  */
 
 package ija.ija2016.reversi.gui;
@@ -139,7 +139,8 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
         fc.setCurrentDirectory(workingDirectory);
         r = new Random();
         
-        
+        freezeFor = r.nextInt(freezeFor);
+        freezeAfter = r.nextInt(freezeAfter);
         
         serialize(game, "game-undo.ser");
 		
