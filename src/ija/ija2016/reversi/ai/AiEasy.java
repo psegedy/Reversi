@@ -1,9 +1,3 @@
-/**
- * Class AiEasy implements Interface Ai
- * @author Patrik Segedy 
- * @author Tibor Dudl√°k
- */
-
 package ija.ija2016.reversi.ai;
 
 import java.util.ArrayList;
@@ -13,12 +7,18 @@ import ija.ija2016.reversi.board.Disk;
 import ija.ija2016.reversi.board.Field;
 import ija.ija2016.reversi.game.Game;
 
+/**
+ * Class AiEasy implements Interface Ai
+ * @author Patrik Segedy 
+ * @author Tibor Dudl·k
+ */
+
 public class AiEasy implements Ai{
 	
 	/**
 	 * Method makeMove take parameter game and changes 
 	 * it by putting disk on random boardField
-	 * @param actual game
+	 * @param game - actual game
 	 * @return changed game
 	 */
 	public Game makeMove(Game game) {

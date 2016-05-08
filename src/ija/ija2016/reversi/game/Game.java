@@ -1,12 +1,11 @@
-/**
- * Class 
- * @author Patrik Segedy
- * @author Tibor Dudlák
- */
 package ija.ija2016.reversi.game;
 
 import ija.ija2016.reversi.board.Board;
-
+/**
+ * Class Game initializes game board and players
+ * @author Patrik Segedy
+ * @author Tibor Dudlak
+ */
 public class Game implements java.io.Serializable{
 
 	private static final long serialVersionUID = 4225826126034520444L;
@@ -15,7 +14,7 @@ public class Game implements java.io.Serializable{
 	
 	/**
 	 * Constructor of game
-	 * @param board
+	 * @param - board
 	 */
 	public Game (Board board) {
 		this.board = board;
@@ -23,9 +22,9 @@ public class Game implements java.io.Serializable{
 	
 	/**
 	 * Method for adding player into game
-	 * @param player Constructor of player
-	 * @return <code>true</code> on success;
-     *         <code>false</code> otherwise.
+	 * @param - player Constructor of player
+	 * @return - <code>true</code> on success;
+     *         - <code>false</code> otherwise.
 	 */
 	public boolean addPlayer(Player player) {
 		if (player.isWhite()) {	
@@ -44,7 +43,7 @@ public class Game implements java.io.Serializable{
 	
 	/**
 	 * Method for getting current player
-	 * @return current player object
+	 * @return - current player object
 	 */
 	public Player currentPlayer() {
 		return currentPlayer;
@@ -52,7 +51,7 @@ public class Game implements java.io.Serializable{
 	
 	/**
 	 * Method for switching current player
-	 * @return next player
+	 * @return - next player
 	 */
 	public Player nextPlayer() {
 		if (currentPlayer.isWhite()) {
@@ -66,7 +65,7 @@ public class Game implements java.io.Serializable{
 	}
 	/**
 	 * Method for getting game board
-	 * @return game board
+	 * @return - game board
 	 */
 	public Board getBoard() {
 		return board;

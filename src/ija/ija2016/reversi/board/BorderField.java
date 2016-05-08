@@ -1,15 +1,12 @@
-/**
- * Class 
- * @author Patrik Segedy 
- * @author Tibor Dudlák
- */
 package ija.ija2016.reversi.board;
 
+/**
+ * Class Border field represents border of playing board
+ * @author Patrik Segedy 
+ * @author Tibor Dudlak
+ */
 public class BorderField implements Field, java.io.Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4767790484188912360L;
 
 	@Override

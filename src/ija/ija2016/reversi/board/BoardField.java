@@ -1,22 +1,23 @@
-/**
- * Class 
- * @author Patrik Segedy 
- * @author Tibor Dudlák
- */
 package ija.ija2016.reversi.board;
 
+/**
+ * Class Board Field represents field on playing board
+ * @author Patrik Segedy 
+ * @author Tibor Dudlak
+ */
 public class BoardField implements Field, java.io.Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8757784087839655732L;
-	//private static int startDisks = 0;
 	private int row;
 	private int col;
 	private Disk disk;
 	private Field[] fieldArr = new Field[8]; 
 	
+	/**
+	 * Constructor of Board Field with coords row and col
+	 * @param row
+	 * @param col
+	 */
 	public BoardField(int row, int col) {
 		this.row = row;
 		this.col = col;
@@ -32,7 +33,12 @@ public class BoardField implements Field, java.io.Serializable {
 		return fieldArr[dirs.ordinal()];
 	}
 	
-	@Override
+	/**
+	 * Method setting starting disks
+	 * @param disk
+	 * @return <code>true</code> - on success;
+     *         <code>false</code> - otherwise.
+	 */
 	public boolean putStartDisk(Disk disk) {
 		if (this.disk == null) {
 			this.disk = disk;
@@ -42,7 +48,11 @@ public class BoardField implements Field, java.io.Serializable {
 			return false;
 	}
 
-	@Override
+	/**
+	 * Puts disk on field.
+	 * @return <code>true</code> - on success;
+     *         <code>false</code> - otherwise.
+	 */
 	public boolean putDisk(Disk disk) {
 		boolean newDiskSet = false;
 		
@@ -104,7 +114,9 @@ public class BoardField implements Field, java.io.Serializable {
 		return false;
 	}
 	
-	@Override
+	/**
+	 * Method returns disk on this field
+	 */
 	public Disk getDisk() {
 		if (this.disk != null)
 			return disk;
@@ -167,7 +179,11 @@ public class BoardField implements Field, java.io.Serializable {
 		return true;
 	}
 
-	@Override
+	/**
+	 * Puts disk.
+	 * @return <code>true</code> - when field is empty;
+     *         <code>false</code> - otherwise.
+	 */
 	public boolean canPutDisk(Disk disk) {
 		// policko je obsadene ?
 		if (!this.isEmpty())
@@ -209,7 +225,11 @@ public class BoardField implements Field, java.io.Serializable {
 		return false;
 	}
 
-	@Override
+	/**
+	 * Checks if field is empty
+	 * @return <code>true</code> - when field is empty;
+     *         <code>false</code> - otherwise.
+	 */
 	public boolean isEmpty() {
 		if (this.disk == null)
 			return true;

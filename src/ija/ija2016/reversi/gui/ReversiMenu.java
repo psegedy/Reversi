@@ -1,12 +1,3 @@
-/**
- * Class including method main
- * Extends JFrame
- * Draws main menu and options menu
- * Starting new and loaded game
- * @author Patrik Segedy 
- * @author Tibor Dudlák
- */
-
 package ija.ija2016.reversi.gui;
 
 import java.awt.Font;
@@ -19,7 +10,14 @@ import java.io.File;
 import ija.ija2016.reversi.gui.ReversiGame;
 
 import javax.swing.*;
-
+/**
+ * Class including method main
+ * Extends JFrame
+ * Draws main menu and options menu
+ * Starting new and loaded game
+ * @author Patrik Segedy 
+ * @author Tibor Dudlak
+ */
 public class ReversiMenu extends JFrame{
 	
 	private static final long serialVersionUID = 6491712156407424473L;
@@ -79,7 +77,7 @@ public class ReversiMenu extends JFrame{
 	/**
 	 * Method main.
 	 * Contains listeners on all main menu panel buttons.
-	 * @param args is not used
+	 * @param args - not used
 	 */
 	public static void main(String[] args) {
 		
@@ -163,7 +161,7 @@ public class ReversiMenu extends JFrame{
 		this.setVisible(true);
 		
 		/* AUTHORS LABEL */
-		labelNAMES = new JLabel("by Patrik Segedy & Tibor Dudlák");
+		labelNAMES = new JLabel("by Patrik Segedy & Tibor Dudlak");
 		labelNAMES.setForeground(Color.WHITE);
 		labelNAMES.setFont(new Font("Dialog", Font.BOLD, 10));
 		labelNAMES.setBounds(100, 270, 210, 15);
@@ -578,7 +576,7 @@ public class ReversiMenu extends JFrame{
 	/**
 	 * Method returning size of board selected in options.
 	 * @return size of board
-	 * 		   Default value of size is 8.
+	 * 		   - Default value of size is 8.
 	 */
 	public int getBoardSize(){
 		return size;		
@@ -589,7 +587,7 @@ public class ReversiMenu extends JFrame{
 	 * Default
 	 * @return <code>true</code> when human is set;
      *         <code>false</code> when simple AI is set.
-     *         Default is true.
+     *         - Default is true.
 	 */
 	public boolean getVsPlayer(){
 		return vsPlayer;
@@ -599,7 +597,7 @@ public class ReversiMenu extends JFrame{
 	 * Method returning AI difficulty selected in options.
 	 * @return <code>true</code> when easy is set;
      *         <code>false</code> when hard is set.
-     *         Default is true.
+     *         - Default is true.
 	 */
 	public boolean getIsDifficultyEasy(){
 		return easy;
@@ -607,9 +605,9 @@ public class ReversiMenu extends JFrame{
 	
 	/**
 	 * Method returning freezing option selected in options.
-	 * @return <code>true</code> when freezing is enabled;
-     *         <code>false</code> when freezing is disabled.
-     *         Default is false.
+	 * @return <code>true</code> - when freezing is enabled;
+     *         <code>false</code> - when freezing is disabled.
+     *         - Default is false.
 	 */
 	public boolean getFreezeEnable(){
 		return freeze;
@@ -621,7 +619,7 @@ public class ReversiMenu extends JFrame{
 	 * which represents time in seconds for these disks 
 	 * to be freezed for.
 	 * @return size of board
-	 * 		   Default is 10.
+	 * 		   - Default is 10.
 	 */
 	public int getFreezeFor(){
 		return scBarFor.getValue();
@@ -633,7 +631,7 @@ public class ReversiMenu extends JFrame{
 	 * which represents time in seconds after  disks 
 	 * are about to freeze.
 	 * @return size of board
-	 * 		   Default is 5.
+	 * 		   - Default is 5.
 	 */
 	public int getFreezeAfter(){
 		return scBarAfter.getValue();
@@ -642,7 +640,7 @@ public class ReversiMenu extends JFrame{
 	/**
 	 * Method returning desired count of disks to freeze. 
 	 * @return count of disks
-	 * 		   Default is 2
+	 * 		   - Default is 2
 	 */
 	public int getFreezeCount(){
 		return scBarCount.getValue();
@@ -651,9 +649,9 @@ public class ReversiMenu extends JFrame{
 	/**
 	 * Method returning information that represent 
 	 * whether game was loaded or not.
-	 * @return <code>true</code> when game was loaded;
-     *         <code>false</code> when game was not loaded.
-     *         Default is false.
+	 * @return <code>true</code> - when game was loaded;
+     *         <code>false</code> - when game was not loaded (Default).
+     *         - Default is false.
 	 */
 	public boolean isGameLoaded() {
 		return gameLoaded;
@@ -670,7 +668,7 @@ public class ReversiMenu extends JFrame{
 	/**
 	 * Method setting information that represent 
 	 * whether game was loaded or not.
-	 * @param gameLoaded	represents information.
+	 * @param gameLoaded - represents information.
 	 */
 	public static void setGameLoaded(boolean gameLoaded) {
 		ReversiMenu.gameLoaded = gameLoaded;
