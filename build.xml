@@ -23,7 +23,7 @@
                  charset="UTF-8"
                  docencoding="UTF-8">
             <doctitle><![CDATA[<h1>Reversi Documentation</h1>]]></doctitle>
-            <bottom><![CDATA[<i>Copyright &#169; 2016 Patrik Segedy &amp Tibor Dudlak;. All Points Needed.</i>]]></bottom>
+            <bottom><![CDATA[<i>Copyright &#169; 2016 Patrik Segedy &amp; Tibor Dudlak. All Points Needed.</i>]]></bottom>
         </javadoc>
         <jar destfile="${dest-client}/othello-client.jar" basedir="${build}">
             <manifest>
