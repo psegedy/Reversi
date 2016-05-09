@@ -25,7 +25,7 @@
             <doctitle><![CDATA[<h1>Reversi Documentation</h1>]]></doctitle>
             <bottom><![CDATA[<i>Copyright &#169; 2016 Patrik Segedy &amp Tibor Dudlak;. All Points Needed.</i>]]></bottom>
         </javadoc>
-        <jar destfile="${dest-client}/Reversi.jar" basedir="${build}">
+        <jar destfile="${dest-client}/othello-client.jar" basedir="${build}">
             <manifest>
                 <attribute name="main-class" value="ija.ija2016.reversi.gui.ReversiMenu" />
             </manifest>
@@ -33,9 +33,9 @@
     </target>
 
     <target name="run" depends="compile">
-        <java jar="${dest-client}/Reversi.jar" fork="true">
+        <java jar="${dest-client}/othello-client.jar" fork="true">
             <classpath>
-                <pathelement path="${dest-client}/Reversi.jar" />
+                <pathelement path="${dest-client}/othello-client.jar" />
             </classpath>
         </java>
     </target>
