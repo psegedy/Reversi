@@ -1,16 +1,13 @@
 package ija.ija2016.reversi.gui;
 
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Dimension;
-
-
-import javax.swing.*;
-
+import ija.ija2016.reversi.game.Game;
 import ija.ija2016.reversi.board.Disk;
 import ija.ija2016.reversi.board.Field;
 
-import ija.ija2016.reversi.game.Game;
 
 /**
  * Class cell represents one cell/field at game board
