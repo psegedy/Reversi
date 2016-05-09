@@ -3,17 +3,15 @@ package ija.ija2016.reversi.gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 import javax.swing.*;
 
-import ija.ija2016.reversi.board.Board;
 import ija.ija2016.reversi.board.Disk;
 import ija.ija2016.reversi.board.Field;
 
 import ija.ija2016.reversi.game.Game;
-import ija.ija2016.reversi.game.Player;
+
 /**
  * Class cell represents one cell/field at game board
  * Drawing board's cells onto frame's panel  

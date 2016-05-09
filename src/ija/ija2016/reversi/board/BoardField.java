@@ -35,7 +35,7 @@ public class BoardField implements Field, java.io.Serializable {
     
     /**
      * Method setting starting disks
-     * @param disk
+     * @param disk disk to put
      * @return <code>true</code> - on success;
      *         <code>false</code> - otherwise.
      */

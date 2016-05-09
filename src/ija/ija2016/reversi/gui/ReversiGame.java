@@ -311,8 +311,6 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
     /**
      * Method to deserialize object from file
      * @param filepath path to the file
-     * @exception IOException 
-     * @exception ClassNotFoundException
      */
     public void deserialize(String filepath) {
         try
@@ -466,7 +464,7 @@ public class ReversiGame extends JFrame implements MouseListener, Runnable, Acti
     public void mouseClicked(MouseEvent e) {
         for (Cell cell : cells) {
             if (e.getSource() == cell) {
-                if(cell.canPutDisk(game)) {             
+                if(cell.canPutDisk(game)) {      	       
                     serialize(game, "game-undo.ser");
                     cell.putDisk(game);
                     game.nextPlayer();
